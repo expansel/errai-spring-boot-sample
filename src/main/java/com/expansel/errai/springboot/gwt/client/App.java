@@ -26,9 +26,12 @@ import com.expansel.errai.springboot.gwt.shared.RPCResult;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.json.client.JSONException;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.SimplePanel;
 
 @EntryPoint
 public class App extends Composite {
@@ -115,6 +118,8 @@ public class App extends Composite {
         });
         RootPanel.get().add(btnRPCTrigger);
 
+        // logout is probably best handled with SpringSecurity logout url
+        // but using auth service for example
         Button btnLogout = new Button("Logout");
         btnLogout.addClickHandler(event -> {
             authenticationServiceCaller.call().logout();
@@ -127,7 +132,13 @@ public class App extends Composite {
         authenticationServiceCaller.call(new RemoteCallback<User>() {
             @Override
             public void callback(User user) {
-                Window.alert("User logged in: username=" + user.getIdentifier() + " roles=" + user.getRoles());
+                Label userLabel = new Label(
+                        "User logged in: username=" + user.getIdentifier() + ", roles=" + user.getRoles());
+                RootPanel.get().add(userLabel);
+                SimplePanel panel = new SimplePanel();
+                Anchor logoutLink = new Anchor("Spring Security Logout URL", GWT.getHostPageBaseURL() + "logout");
+                panel.add(logoutLink);
+                RootPanel.get().add(panel);
                 initBtns();
             }
         }).getUser();

@@ -16,7 +16,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         // disabling CSRF as it messes with Errai MessageBus, still need to
         // figure out how to fix it
         http.csrf().disable().authorizeRequests().antMatchers("/login").permitAll().antMatchers("/**").authenticated()
-                .and().formLogin().and().httpBasic();
+                .and().formLogin().defaultSuccessUrl("/", true).and().httpBasic();
     }
 
     @Autowired
