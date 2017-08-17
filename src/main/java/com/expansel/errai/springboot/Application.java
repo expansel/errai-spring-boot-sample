@@ -15,8 +15,12 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.filter.RequestContextFilter;
 
+import com.expansel.errai.spring.server.ErraiRequestDispatcherFactoryBean;
+import com.expansel.errai.spring.server.ErraiServerMessageBusFactoryBean;
+
 @Configuration
-@ComponentScan
+@ComponentScan({ "com.expansel.errai.springboot", "com.expansel.errai.spring.server",
+        "com.expansel.errai.springsecurity.server" })
 @EnableAutoConfiguration
 public class Application {
     private static final Logger logger = LoggerFactory.getLogger(Application.class);

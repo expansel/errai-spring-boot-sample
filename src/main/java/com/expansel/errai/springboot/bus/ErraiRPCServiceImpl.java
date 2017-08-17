@@ -28,7 +28,10 @@ public class ErraiRPCServiceImpl implements ErraiRPCService {
     public RPCResult callPing() {
         logger.info(this + " - callPing");
         RPCResult result = new RPCResult();
-        result.setResult(springService.ping());
+        // From printing the default to string you can see the object memory
+        // reference and thus see the session scope in action, can change the
+        // scope above and recompile to see others in action
+        result.setResult(springService.ping() + " - " + this);
         return result;
     }
 

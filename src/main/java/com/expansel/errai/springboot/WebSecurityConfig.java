@@ -15,7 +15,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         // disabling CSRF as it messes with Errai MessageBus, still need to
         // figure out how to fix it
-        http.csrf().disable().authorizeRequests().anyRequest().authenticated().and().formLogin().and().httpBasic();
+        http.csrf().disable().authorizeRequests().antMatchers("/login").permitAll().antMatchers("/**").authenticated()
+                .and().formLogin().and().httpBasic();
     }
 
     @Autowired
