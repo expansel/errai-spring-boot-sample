@@ -8,7 +8,7 @@ The main point of interest is the code, but the user interface can help seeing t
 Make sure nothing else is running on port 8080.
 
 ```shell
-mvn gwt:clean gwt:compile spring-boot:run
+mvn clean compile gwt:compile spring-boot:run
 ```
 
 ## Login to UI
