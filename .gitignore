@@ -1,3 +1,5 @@
 /gwt-unitCache/
 /.errai/
 /target/
+/.idea/
+**/*.iml
